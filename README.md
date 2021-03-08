@@ -4,7 +4,7 @@ kubectl api-resources -o wide - Список Kubernetes apiGroups
 
 
 
-
+https://github.com/3sergey/kubernetes-practice/tree/master/6_users_service-accouts_roles_role-bindings
 1) Pre-requisit:
 ## specify user, namespace, role-name
 ACCOUNT_NAME=petya
