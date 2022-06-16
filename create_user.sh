@@ -6,7 +6,7 @@ ACCOUNT_NAME=$1
 kubectl create serviceaccount $ACCOUNT_NAME --namespace $NAMESPACE
 
 TOKEN_NAME=$(kubectl get serviceAccounts $ACCOUNT_NAME --namespace $NAMESPACE  -o jsonpath="{.secrets[0].name}")
-TOKEN=$(kubectl describe secrets $TOKEN_NAME --namespace $NAMESPACE | grep 'token:' | rev | cut -d ' ' -f1 | rev)
+TOKEN=$(kubectl get secrets $TOKEN_NAME --namespace $NAMESPACE -o jsonpath="{.data.token}" | base64 --decode)
 CERTIFICATE_AUTHORITY_DATA=$(kubectl config view --flatten --minify -o jsonpath="{.clusters[0].cluster.certificate-authority-data}")
 SERVER_URL=$(kubectl config view --flatten --minify -o jsonpath="{.clusters[0].cluster.server}")
 CLUSTER_NAME=$(kubectl config view --flatten --minify -o jsonpath="{.clusters[0].name}")
